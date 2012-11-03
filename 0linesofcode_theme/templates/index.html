@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+{% load pages_tags mezzanine_tags i18n %}
+<html>
+<head>
+
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="{% block meta_keywords %}{% endblock %}">
+<meta name="description" content="{% block meta_description %}{% endblock %}">
+<title>{% if settings.SITE_TITLE %} | 0 lines Of Code {% endif %}</title>
+<link rel="shortcut icon" href="{{ STATIC_URL }}img/favicon.ico">
+
+
+{% compress css %}
+
+<link rel="stylesheet" href="{{ STATIC_URL }}css/site.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/site.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/prettify.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.responsive.css">
+<link rel="stylesheet" href="{{ STATIC_URL }}css/mezzanine.css">
+
+{% ifinstalled cartridge.shop %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/cartridge.css">
+{% endifinstalled %}
+{% block extra_css %}{% endblock %}
+{% endcompress %}
+
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+{% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<div class="navbar">
+<div class="navbar-inner">
+<div class="container">
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+    {% if settings.SITE_TITLE %}<a class="brand" href="/">0 <i class='icon-reorder'></i> Of Code </a>{% endif %}
+    {% if settings.SITE_TAGLINE %}<p class="tagline">{{ settings.SITE_TAGLINE }}</p>{% endif %}
+    <div class="nav-collapse">
+        <form action="{% url search %}" class="navbar-search pull-right">
+        <input class="search-query" placeholder="{% trans "Search" %}" type="text" name="q" value="{{ request.REQUEST.q }}">
+        </form>
+        {% page_menu "pages/menus/dropdown.html" %}
+    </div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="container">
+<div class="hero-unit">
+  <!--<div id="iconCarousel" class="carousel slide">
+    <!-- Carousel items -->
+    <!--<div class="carousel-inner">
+      <div class="active item"><div><i class="icon-flag"></i></div></div>
+      <div class="item"><div><i class="icon-magic"></i></div></div>
+      <div class="item"><div><i class="icon-beaker"></i></div></div>
+      <div class="item"><div><i class="icon-briefcase"></i></div></div>
+      <div class="item"><div><i class="icon-bullhorn"></i></div></div>
+      <div class="item"><div><i class="icon-umbrella"></i></div></div>
+      <div class="item"><div><i class="icon-star-empty"></i></div></div>
+      <div class="item"><div><i class="icon-envelope"></i></div></div>
+      <div class="item"><div><i class="icon-leaf"></i></div></div>
+      <div class="item"><div><i class="icon-key"></i></div></div>
+      <div class="item"><div><i class="icon-book"></i></div></div>
+      <div class="item"><div><i class="icon-tint"></i></div></div>
+      <div class="item"><div><i class="icon-edit"></i></div></div>
+      <div class="item"><div><i class="icon-search"></i></div></div>
+      <div class="item"><div><i class="icon-home"></i></div></div>
+      <div class="item"><div><i class="icon-picture"></i></div></div>
+      <div class="item"><div><i class="icon-headphones"></i></div></div>
+      <div class="item"><div><i class="icon-heart-empty"></i></div></div>
+      <div class="item"><div><i class="icon-thumbs-up"></i></div></div>
+      <div class="item"><div><i class="icon-flag"></i></div></div>
+    </div>-->
+    <!-- Carousel nav -->
+    <!--<a class="carousel-control left" href="#iconCarousel" data-slide="prev"
+        onClick="_gaq.push(['_trackEvent', 'iconCarousel', 'Prev']);">
+      <i class="icon-arrow-left"></i></a>
+    <a class="carousel-control right" href="#iconCarousel" data-slide="next"
+        onClick="_gaq.push(['_trackEvent', 'iconCarousel', 'Next']);">
+      <i class="icon-arrow-right"></i></a>
+  </div>-->
+  
+  <div class="hero-content">
+    <h1>0 Lines of code</h1>
+    <p>spend you time in innovation. leave on us to worry about writing your application. get a headstart.</p>
+    <div class="actions">
+      <a class="btn btn-primary btn-large" href="products"
+           >
+        Products</a>
+      <a class="btn btn-large btn-github" href="services"
+          >
+        Services</a>
+    </div>
+  </div>
+</div>
+
+{% include "includes/social_buttons.html" %}
+
+
+<footer>
+<div class="container">
+
+<br style="clear:both">
+<p>
+    {% trans "Powered by" %}
+    <a href="http://mezzanine.jupo.org">Mezzanine</a>{% ifinstalled cartridge.shop %},
+    <a href="http://cartridge.jupo.org">Cartridge</a>{% endifinstalled %}
+    {% trans "and" %}
+    <a href="http://www.djangoproject.com">Django</a>
+    <span class="separator">|</span>
+    {% trans "Theme by" %} <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>
+    {% ifinstalled mezzanine.mobile %}
+    <span class="separator">|</span>
+    <a href="{% url set_device "mobile" %}?next={{ request.path }}">{% trans "View Mobile Site" %}</a>
+    {% endifinstalled %}
+</p>
+</div>
+</footer>
+
+{% compress js %}
+<script src="{{ STATIC_URL }}mezzanine/js/{{ settings.JQUERY_FILENAME }}"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+<script src="{{ STATIC_URL }}js/index.js"></script>
+<script>
+$(function() {
+    $('.middleinput:text, textarea').addClass('xlarge');
+    $('.control-group label').addClass('control-label');
+});
+</script>
+{% block extra_js %}{% endblock %}
+{% endcompress %}
+
+</body>
