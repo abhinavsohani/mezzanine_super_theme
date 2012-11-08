@@ -75,8 +75,9 @@ $(function() {
 {% endfor %}
 {% endnevercache %}
 
-
+<div class="hero-unit">
 <h1>{% block title %}{% endblock %}</h1>
+</div>
 <!--
 <ul class="breadcrumb">
 {% spaceless %}
@@ -89,17 +90,19 @@ $(function() {
 <div class="container">
 <div class="row">
 
-<<div class="span2 left">
+<!--<div class="span2 left">
     {% block left_panel %}
     <div class="panel tree">{% page_menu "pages/menus/tree.html" %}</div>
     {% endblock %}
 </div>
+-->
 
-<div class="span7 middle">
+<div class="span12">
     
 	{% block main %}{% endblock %}
 	
 </div>
+
 <!--
 <div class="span3 right">
     {% nevercache %}
